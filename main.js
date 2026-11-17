@@ -1,6 +1,6 @@
 /**
  * TWN Media - Premium Agency Interactive Features
- * Lenis Smooth Scrolling, Angepasstes 3D-Tilt, Custom Cursor,
+ * Lenis Smooth Scrolling, Angepasstes 3D-Tilt,
  * Formular-Handling und scrollbare Pop-Up Modals
  */
 
@@ -35,53 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       gsap.ticker.lagSmoothing(0);
     }
-  }
-
-  // ==========================================================================
-  // 2. Interactive Custom Cursor mit Magnetik
-  // ==========================================================================
-  const cursorDot = document.querySelector('.custom-cursor');
-  const cursorFollower = document.querySelector('.custom-cursor-follower');
-
-  if (cursorDot && cursorFollower && window.matchMedia('(pointer: fine)').matches) {
-    let mouseX = -100, mouseY = -100;
-    let followerX = -100, followerY = -100;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-    }, { passive: true });
-
-    function animateFollower() {
-      followerX += (mouseX - followerX) * 0.16;
-      followerY += (mouseY - followerY) * 0.16;
-      cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px)`;
-      requestAnimationFrame(animateFollower);
-    }
-    requestAnimationFrame(animateFollower);
-
-    // Hover auf interaktiven Elementen
-    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .tilt-card, .service-card, label');
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursorDot.classList.add('hovering');
-        cursorFollower.classList.add('hovering');
-      });
-      el.addEventListener('mouseleave', () => {
-        cursorDot.classList.remove('hovering');
-        cursorFollower.classList.remove('hovering');
-      });
-    });
-
-    window.addEventListener('mousedown', () => {
-      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(0.7)`;
-      cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) scale(0.85)`;
-    });
-    window.addEventListener('mouseup', () => {
-      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(1)`;
-      cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) scale(1)`;
-    });
   }
 
   // ==========================================================================
